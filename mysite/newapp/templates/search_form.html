@@ -1,0 +1,15 @@
+<html>
+<head>
+    <title>Search</title>
+   	
+      
+</head>
+<body>
+    <form action="/newapp/search/" method="post">{% csrf_token %}
+        <input type="email" name="email" placeholder="Username">
+        <input type="password" name="password" placeholder="password">
+        <input type="text" name="subid" placeholder="subid">
+        <input type="submit" value="Search">
+    </form>
+</body>
+</html>

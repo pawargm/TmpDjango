@@ -1,0 +1,20 @@
+{% extends "bootstrap_include.html" %}
+
+{% block content %}
+
+<p>
+	<div class="col-sm-4"></div>			
+	<div class="list-group">
+		<div class="col-sm-4">
+		{% for rg in lst_rg %}
+			<a href="http://127.0.0.1:8000/newapp/delete" class="list-group-item">{{rg}}</a>	
+		
+		</div>
+			<div class="col-sm-4"></div>
+	</div>
+</p>
+
+
+{% endfor %}
+
+{% endblock %}
