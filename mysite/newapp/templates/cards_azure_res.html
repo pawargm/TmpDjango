@@ -1,0 +1,144 @@
+{% extends "bootstrap_include.html" %}
+
+{% block content %}
+
+
+
+<div class="container-fluid">
+  <center><h1>Project Resource Management System For Cloud</h1></center>
+
+
+  
+
+<table class="table">
+<tbody>
+
+<tr>
+
+<th>
+<center>
+<div class="card" style="width: 20rem;">
+   {% load staticfiles %}
+  <img class="card-img-top" src="{% static '/azure_vm1c.png' %}" alt="Card image cap">
+  <div class="card-block">  
+    <h4 class="card-title">Virtual Machines</h4>
+    <p class="card-text"></p>
+
+    <form action="#" method="post">{% csrf_token %}
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary">Go To Virtual Machine</button>
+      </div>
+    </form>
+
+    <form action="/newapp/vm_lst" mathod="post">{% csrf_token %}
+    <button type="submit" class="btn btn-primary" data-toggle='model' >List of Virtual Machines <span class="badge">({{vm}})</span></button>
+    </form>
+  </div>
+  
+</center>
+</th>
+
+<th>
+<center>
+<div class="card" style="width: 20rem;">
+   {% load staticfiles %}
+  <img class="card-img-top" src="{% static '/azure_storage1.png' %}" alt="Card image cap">
+  <div class="card-block">
+    <h4 class="card-title">Storage Accounts</h4>
+    <p class="card-text"></p>
+
+    <form action="#" method="post">{% csrf_token %}
+    <div class="form-group">
+    <a href="#" class="btn btn-primary">Go to Storage Account</a>
+    </div>
+    </form>
+
+    <form action="/newapp/str_acc_lst" mathod="post">{% csrf_token %}
+    <button type="submit" class="btn btn-primary">List of storage Account <span class="badge">({{strgAcc}})</span></button>
+    </form>
+  </div>
+</div>
+</center>
+</th>
+
+<th>
+<center>
+<div class="card" style="width: 20rem;">
+   {% load staticfiles %}
+  <img class="card-img-top" src="{% static '/azure_resource_group1.png' %}" alt="Card image cap">
+  <div class="card-block">
+    <h4 class="card-title">Resource Group</h4>
+    <p class="card-text"></p>
+    
+
+    <form action="#" method="post">{% csrf_token %}
+    <div class="form-group">
+    <a href="#" class="btn btn-primary">Go to Resource Group</a>
+    </div>
+    </form>
+
+    <form action="/newapp/lst_res_group" mathod="post">{% csrf_token %}
+    <button type="submit" class="btn btn-primary">List of Resource Group <span class="badge">({{res_g}})</span></button>
+    </form>
+
+  </div>
+</div>
+</center>
+</th>
+
+</tr>
+
+<tr>
+
+<th>
+<center>
+<div class="card" style="width: 20rem;">
+   {% load staticfiles %}
+  <img class="card-img-top" src="{% static '/azure_network1.png' %}" alt="Card image cap">
+  <div class="card-block">
+    <h4 class="card-title">Virtual Private Network</h4>
+    <p class="card-text"></p>
+
+    <form action="#" method="post">{% csrf_token %}
+    <div class="form-group">
+    <a href="#" class="btn btn-primary">Go to Azure Network</a>
+    </div>
+    </form>
+
+    <form action="/newapp/lst_vpn" mathod="post">{% csrf_token %}
+    <button type="submit" class="btn btn-primary">List Of VPNS <span class="badge">({{vpn}})</span></button>
+    </form>
+
+    <form action="/newapp/lst_pub_ips" mathod="post">{% csrf_token %}
+    <button type="submit" class="btn btn-primary">List Of Public IPs <span class="badge">({{public_ip}})</span></button>
+    </form>
+
+    <form action="/newapp/lst_nic" mathod="post">{% csrf_token %}
+    <button type="submit" class="btn btn-primary">List Of NICs<span class="badge">({{nic}})</span></button>
+    </form>
+
+    <form action="/newapp/lst_nsg" mathod="post">{% csrf_token %}
+    <button type="submit" class="btn btn-primary">List Of NSG <span class="badge">({{nsg}})</span></button>
+    </form>
+
+
+
+  </div>
+</div>
+</center>
+</th>
+
+</tr>
+
+
+
+
+
+
+
+</tbody>
+</table>
+
+
+
+{% endblock %}

@@ -2,16 +2,31 @@
 
 {% block content %}
 
+
+<div class="jumbotron text-center">
+<div class="row">
+    <div class="col-sm-4" style="background-color:lavender;"><center><h1>Azure</h1></center></div>
+    <div class="col-sm-4" style="background-color:lavenderblush;"><center><h1>Resource</h1></center></div>
+    <div class="col-sm-4" style="background-color:lavender;"><center><h1>Manager</h1></center></div>
+ </div>
+ </div>
+
+
+
 <p>
-	<div class="col-sm-4"></div>			
-	<div class="list-group">
-		<div class="col-sm-4">
-		{% for rg in lst_rg %}
-			<a href="http://127.0.0.1:8000/newapp/delete" class="list-group-item">{{rg}}</a>	
-		
-		</div>
-			<div class="col-sm-4"></div>
-	</div>
+			<div class="container">
+			<div class="row">
+				{% for vm in lst_rg %}
+				<div class="col-sm-2 col-md-3 col-lg-4"></div>
+				<div class="col-xs-12 col-sm-8 col-md-6 col-lg-4">
+					<center><div class="list-group-item">{{vm}}</div></center>
+				</div>
+				<div class="col-sm-2 col-md-3 col-lg-4"></div>
+			</div>
+			</div>
+
+
+
 </p>
 
 

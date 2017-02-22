@@ -15,8 +15,6 @@ subid = None
 
 credentials = None
 
-
-
 def current_datetime(req):
 	now = datetime.datetime.now().date()
 	html = "It is now %s "% now
@@ -68,9 +66,12 @@ def authenticate(req):
 		req.session['password'] = password
 		req.session['subid'] = subid
 		
-		#credentials = UserPassCredentials(email,password)
+		credentials = UserPassCredentials(email,password)
+		resource_client = ResourceManagementClient(credentials,subid)
+
 		msg += "Valid user!!!!"
 		
+
 		fo = open("netrc","ab")
 		machine = "portal.azure.com"+email
 		str1 ="\nmachine "+machine+"\n"+"login "+email+"\n"+"password "+password
@@ -97,23 +98,24 @@ def  list_resource(req):
 
 	try:
 		credentials = UserPassCredentials(email, password)
-		resource_client = ResourceManagementClient(credentials,subid)
+		resource_client = 	ResourceManagementClient(credentials,subid)
 
 	except Exception as e:
 		return HttpResponse(e)
 
 	for rg in resource_client.resource_groups.list():
 		for item in resource_client.resource_groups.list_resources(rg.name):
-			list_res.append(item.name)
+			list_res.append(item)
 
 	req.session.delete()
 	return render(req,"lst_rg.html",{"lst_rg":list_res})
 
 
-
+#checking to presence of netrc file
 def check_netrc(req):
 
 	msg = ""
+	dic = {}
 	if os.path.isfile("netrc"):
 		info = netrc.netrc("netrc")
 		#append Username to machine here we appaends just email 
@@ -124,26 +126,217 @@ def check_netrc(req):
 		try:
 			req.session['email'] = email
 			req.session['password'] = password
-			req.session['subid'] = "c721e2fd-94b3-4155-952e-60ba88bc1f6a"
+			req.session['subid'] = "c721e2fd-94b3-4155-952e-60ba88bc1f6a"#this subid will taken from its database
+
 			credentials = UserPassCredentials(email,password)
+			resource_client = ResourceManagementClient(credentials,req.session['subid'])
 
-			msg += "Valid usr!!"
+			dic['vm'] = 0
+			dic['nic'] = 0
+			dic['vpn'] = 0
+			dic['public_ip'] = 0
+			dic['nsg'] = 0
+			dic['strgAcc'] = 0
 
-			return render(req,'validation_msg.html',{"message":msg})
+			cnt_rg = 0
+			for rg in resource_client.resource_groups.list():
+				cnt_rg += 1
+				for item in resource_client.resource_groups.list_resources(rg.name):
+
+					if "Microsoft.Compute/virtualMachines" == item.type:
+						dic['vm'] += 1
+
+					if "Microsoft.Network/networkInterfaces" == item.type:
+						dic['nic'] += 1
+
+					if "Microsoft.Network/publicIPAddresses" == item.type:
+						dic['public_ip'] += 1
+
+					if "Microsoft.Network/virtualNetworks" == item.type:
+						dic['vpn'] += 1
+
+					if "Microsoft.Network/networkSecurityGroups" == item.type:
+						dic['nsg'] += 1
+
+					if "Microsoft.Storage/storageAccounts" == item.type:
+						dic['strgAcc'] += 1
+
+
+			return render(req,'cards_azure_res.html',{"vm":dic['vm'],"nic":dic['nic'],"public_ip":dic['public_ip'],"vpn":dic["vpn"],"nsg":dic['nsg'],"strgAcc":dic['strgAcc'],"res_g":cnt_rg})
 		except Exception as e:
-			msg += "EROOR: "
-			msg += str(e)
-			return render(req,'validation_msg.html',{"message":e})
-
+			return HttpResponse(e)
 	else:
 		msg = "You have to login!"
 		return render(req,'sample.html',{"message":msg})
 
 
-
+#login from selection of access of cloud amezone or azure
 def login_acc(req):
 
 	return render(req,'choice_acc.html')
 
+#showing options of azure cloud like storage acc,vm,vpn,resource group
+def azure_res(req):
+
+	return render(req,'cards_azure_res.html')
+
+#it will shows list of vms
+def lst_vm(req):
+
+	list_res = []
+
+	email = req.session['email']
+	password = req.session['password']
+	subid = str(req.session['subid'])
+
+	try:
+		credentials = UserPassCredentials(email, password)
+		resource_client = ResourceManagementClient(credentials,subid)
+
+	except Exception as e:
+		return HttpResponse(e)
+
+	for rg in resource_client.resource_groups.list():
+		for item in resource_client.resource_groups.list_resources(rg.name):
+			if "Microsoft.Compute/virtualMachines" == item.type:
+				list_res.append(item.name)
+
+	return  render(req,"lst_rg.html",{"lst_rg":list_res,"lst":list_res})
+
+
+#getting list of Storage account
+def lst_storage_acc(req):
+
+	lst_str_acc = []
+
+	email = req.session['email']
+	password = req.session['password']
+	subid = str(req.session['subid'])
+
+	try:
+		credentials = UserPassCredentials(email,password)
+		resource_client = ResourceManagementClient(credentials,subid)
+	except Exception as e:
+		return HttpResponse(e)
+	
+	for rg in resource_client.resource_groups.list():
+		for item in resource_client.resource_groups.list_resources(rg.name):
+			if "Microsoft.Storage/storageAccounts" == item.type:
+				lst_str_acc.append(item.name)
+
+	return render(req,'lst_rg.html',{"lst_rg":lst_str_acc})
+
+#getting list of vpn
+
+def lst_vpn(req):
+
+	lst_vpn = []
+
+	email = req.session['email']
+	password = req.session['password']
+	subid = str(req.session['subid'])
+
+	try:
+		credentials = UserPassCredentials(email,password)
+		resource_client = ResourceManagementClient(credentials,subid)
+	except Exception as e:
+		return HttpResponse(e)
+	
+	for rg in resource_client.resource_groups.list():
+		for item in resource_client.resource_groups.list_resources(rg.name):
+			if "Microsoft.Network/virtualNetworks" == item.type:
+				lst_vpn.append(item.name)
+
+	return render(req,'lst_rg.html',{"lst_rg":lst_vpn})
+
+#list out ips
+def lst_pub_ips(req):
+
+	lst_ips = []
+
+	email = req.session['email']
+	password = req.session['password']
+	subid = str(req.session['subid'])
+
+	try:
+		credentials = UserPassCredentials(email,password)
+		resource_client = ResourceManagementClient(credentials,subid)
+	except Exception as e:
+		return HttpResponse(e)
+	
+	for rg in resource_client.resource_groups.list():
+		for item in resource_client.resource_groups.list_resources(rg.name):
+			if "Microsoft.Network/publicIPAddresses" == item.type:
+				lst_ips.append(item.name)
+
+	return render(req,'lst_rg.html',{"lst_rg":lst_ips})
+
+#list out nic 
+def lst_nic(req):
+
+	lst_nic = []
+
+	email = req.session['email']
+	password = req.session['password']
+	subid = str(req.session['subid'])
+
+	try:
+		credentials = UserPassCredentials(email,password)
+		resource_client = ResourceManagementClient(credentials,subid)
+	except Exception as e:
+		return HttpResponse(e)
+	
+	for rg in resource_client.resource_groups.list():
+		for item in resource_client.resource_groups.list_resources(rg.name):
+			if "Microsoft.Network/networkInterfaces" == item.type:
+				lst_nic.append(item.name)
+
+	return render(req,'lst_rg.html',{"lst_rg":lst_nic})
+
+#List of networksecuritygroup
+def lst_nsg(req):
+
+	lst_nsg = []
+
+	email = req.session['email']
+	password = req.session['password']
+	subid = str(req.session['subid'])
+
+	try:
+		credentials = UserPassCredentials(email,password)
+		resource_client = ResourceManagementClient(credentials,subid)
+	except Exception as e:
+		return HttpResponse(e)
+	
+	for rg in resource_client.resource_groups.list():
+		for item in resource_client.resource_groups.list_resources(rg.name):
+			if "Microsoft.Network/networkSecurityGroups" == item.type:
+				lst_nsg.append(item.name)
+
+	return render(req,'lst_rg.html',{"lst_rg":lst_nsg})
+
+#list out resource group
+def lst_rg(req):
+
+	lst_rg = []
+
+	email = req.session['email']
+	password = req.session['password']
+	subid = str(req.session['subid'])
+
+	try:
+		credentials = UserPassCredentials(email,password)
+		resource_client = ResourceManagementClient(credentials,subid)
+	except Exception as e:
+		return HttpResponse(e)
+	
+	for item in resource_client.resource_groups.list():
+				lst_rg.append(item.name)
+
+	return render(req,'lst_rg.html',{"lst_rg":lst_rg})
+
+
+
+	
 
 
