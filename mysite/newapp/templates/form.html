@@ -1,0 +1,179 @@
+{% extends "bootstrap_include.html" %}
+
+{% block content %}
+
+<div class="row">
+  
+  <div class="col-md-3 col-sm-3"></div>
+  
+  <div class="col-md-6 col-sm-6">
+
+  <!--<div class="card" style="width: 20rem;">-->
+   
+  <!--<div class="card-block">  -->
+  <br>
+  <br>
+
+  <form class="form-horizontal" action="/newapp/backj/" method="post">{% csrf_token %}
+
+  <div class="form-group">
+    <label class="control-label " for="resgroup">ResourceGroup</label>
+    
+      <input type="text" class="form-control" name="resgroup" id="resgroup" placeholder="resgroup">
+    
+  </div>
+  <div class="form-group">
+    <label class="control-label" for="location">Location:</label>
+    
+      <input type="text" class="form-control" name="location" id="location" placeholder="location">
+    
+  </div>
+  <hr>
+
+  <div class="form-group"> 
+    <div>
+    	<center><label>Storage Account</label></center>
+    	<label class="control-label" for="StorageAccName">StorageAccountName</label>
+    	<input type="text" class="form-control" name="storage_acc_name" id="acc_name" placeholder="AccountName">
+    </div>
+  </div>
+
+  <div class="form-group"> 
+    <div>
+    	<label class="control-label" for="replication_type">ReplicationType</label>
+    	<input type="text" class="form-control" name="replication_type" id="replication_id" placeholder="replication type">
+    </div>
+  </div>
+ 
+  <hr>
+
+    <div class="form-group"> 
+    <div>
+    	<center><label>Networking Containt</label></center>
+    	<label class="control-label" for="public_ip_name">PublicIP Name</label>
+    	<input type="text" class="form-control" name="public_ip_name" id="public_ip_name" placeholder="public ip name">
+    </div>
+  	</div>
+
+    <div class="form-group"> 
+    <div>
+    	<label class="control-label" for="Domainlabel">Domain Label</label>
+    	<input type="text" class="form-control" name="domain_label" id="domain_label" placeholder="Doain name">
+    </div>
+  </div>
+
+  <hr>
+
+	<div class="form-group"> 
+    <div>
+
+    	<label class="control-label" for="vpn_name">VPN NAME</label>
+    	<input type="text" class="form-control" name="vpn_name" id="vpn_name" placeholder="VPN name">
+    </div>
+  	</div>  
+  
+
+  	<div class="form-group"> 
+    <div>
+    	<label class="control-label" for="vpn_name">VPN Address</label>
+    	<input type="text" class="form-control" name="vpn_address" id="vpn_address" placeholder="VPN Address">
+    </div>
+  	</div>
+
+  	<hr>
+
+  	<div class="form-group"> 
+    <div>
+    	<label class="control-label" for="subnet_name">Subnet Name</label>
+    	<input type="text" class="form-control" name="subnet_name" id="subnet_name" placeholder="Subnet Name">
+    </div>
+  	</div>
+
+  	<div class="form-group"> 
+    <div>
+		<label class="control-label" for="vpn_name">Subnet Ip address</label>
+    	<input type="text" class="form-control" name="subnet_address" id="subnet_address" placeholder="SubnetAddress">
+    </div>
+  	</div>
+
+  	<hr>
+
+  	<div class="form-group"> 
+    <div>
+		<label class="control-label" for="NIC name">NIC NAME</label>
+    	<input type="text" class="form-control" name="nic_name" id="nic_name" placeholder="nic name">
+    </div>
+  	</div>  
+  	
+  	<hr>
+
+  	<div class="form-group"> 
+    <div>
+    	<center><label>Virtual Machine</label></center>
+    	<label class="control-label" for="public_ip_name">Virtual Machine Name</label>
+    	<input type="text" class="form-control" name="vm_name" id="vm_name" placeholder="virtual Machine Name">
+    </div>
+  	</div>
+
+  	<div class="form-group"> 
+    <div>
+		<label class="control-label" for="vm_type">VM Type</label>
+    	<input type="text" class="form-control" name="vm_type" id="vm_type" placeholder="vm type">
+    </div>
+  	</div> 
+
+  	<div class="form-group"> 
+    <div>
+		<label class="control-label" for="username">AdminUsername</label>
+    	<input type="text" class="form-control" name="admin_name" id="admin_name" placeholder="admin name">
+    </div>
+  	</div> 
+
+	<div class="form-group"> 
+    <div>
+		<label class="control-label" for="Password">Password</label>
+    	<input type="text" class="form-control" name="admin_pass" id="admin_pass" placeholder="admin Password">
+    </div>
+  	</div> 
+
+  	<div class="form-group"> 
+    <div>
+		<label class="control-label" for="username">VM Standard</label>
+    	<input type="text" class="form-control" name="vm_standard" id="vm_standard" placeholder="VM Standard">
+    </div>
+  	</div> 
+
+  	<hr>
+
+  	<div class="form-group"> 
+    <div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+  	</div>
+
+  	
+
+	 
+
+
+
+  </form>
+
+
+  <!--</div>
+  </div>-->
+  </div>
+
+
+  <div class="col-md-3 col-sm-3"></div>
+
+
+  </div>
+
+</div>
+  
+
+
+
+
+{% endblock %}

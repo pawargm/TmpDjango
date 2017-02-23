@@ -18,4 +18,6 @@ urlpatterns = [
 		url(r'^lst_nic/',views.lst_nic,name = 'lst_nic'),
 		url(r'^lst_nsg/',views.lst_nsg,name = 'lst_nsg'),
 		url(r'^lst_res_group/',views.lst_rg,name = 'lst_rg'),
+		url(r'^call_form/',views.call_form,name = 'call_form'),
+		url(r'^backj/',views.backj,name = 'backj')
 ]
