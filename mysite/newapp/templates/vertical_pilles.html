@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>PRMS</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+
+
+
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="#">PRMS</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Home</a></li>
+        
+          
+          
+            <li><a href="#"></a></li>
+            <li><a href="#">Discovery of Resources</a></li>
+            <li><a href="#">Notification</a></li>
+      
+        
+            <li><a href="#">Page 2</a></li>
+            <li><a href="#">Page 3</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="http://127.0.0.1:8000/newapp/signup_acc/"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+        <li><a href="http://127.0.0.1:8000/newapp/login_acc/"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h3>Network Contents</h3>
+  <div class="row">
+    
+    <div class="col-md-3">
+      <ul class="nav nav-pills nav-stacked">
+        
+        <li class="active"><a data-toggle="pill" href="#menu1">Virtual Network</a></li>
+        <li><a data-toggle="pill" href="#menu2">Public IP</a></li>
+        <li><a data-toggle="pill" href="#menu3">Menu 3</a></li>
+      </ul>
+    </div>
+
+    <div class="col-md-9">
+      
+      <div class="tab-content">
+
+
+      <div id="menu1" class="tab-pane fade in active">
+      <h3>Virtual Network</h3>
+          
+          <ul class="nav nav-tabs">
+          <li class="active"><a data-toggle="tab" href="#a">Azure Vnet</a></li>
+          <li><a data-toggle="tab" href="#b">Creation of Vnet with existing Resource Group</a></li>
+          <li><a data-toggle="tab" href="#c">Creation of Vnet with new Resource Group</a></li>
+          </ul>
+
+          <div class="tab-content">
+
+          <div id="a" class="tab-pane fade in active">
+            <br>
+            <br>
+            <p>
+              An Azure virtual network (VNet) is a representation of your own network in the cloud. It is a logical isolation of the Azure cloud dedicated to your subscription. You can fully control the IP address blocks, DNS settings, security policies, and route tables within this network. You can also further segment your VNet into subnets and launch Azure IaaS virtual machines (VMs) and/or Cloud services (PaaS role instances). Additionally, you can connect the virtual network to your on-premises network using one of the connectivity options available in Azure. In essence, you can expand your network to Azure, with complete control on IP address blocks with the benefit of enterprise scale Azure provides.
+            <br>
+            <br>
+            <br>
+            To better understand VNets, take a look at the figure below, which shows a simplified on-premises network.
+
+            {% load staticfiles %}
+            <center><img src="{% static '/azure_network.png' %}" class="img-responsive"></center>
+
+            <br>
+            <br>
+          <!--end of a -->
+          </div>
+
+          <div id="b" class="tab-pane fade">
+              
+
+
+              <div class="row">
+                <div class="col-md-3 col-sm-3"></div>
+                  <div class="col-md-6 col-sm-6">
+                    <br>
+                    <br>
+
+                    <form class="form-horizontal" action="/newapp/vpn_creation/" method="post">{% csrf_token %}
+
+                        <div class="form-group">
+                        <label for="sel1" name="abc" value="sel1">Resource Groups</label>
+                        <select class="form-control" name="drop1" id="sel1">
+                        {% for item in lst_rg %}
+                          <option name={{item}} value={{item}}>{{item}}</option>
+                        {% endfor %}
+                        </select>
+                        </div>
+                       
+
+                    <div class="form-group"> 
+                     <div>
+                        <label class="control-label" for="vpn_name">VPN NAME</label>
+                        <input type="text" class="form-control" name="vpn_name" id="vpn_name" placeholder="VPN name">
+                     </div>
+                    </div>  
+                    
+                    <div class="form-group"> 
+                      <div>
+                          <label class="control-label" for="vpn_name">VPN Address (In the format X.X.X.X/Y)</label>
+                          <input type="text" class="form-control" name="vpn_address" id="vpn_address" placeholder="VPN Address">
+                      </div>
+                    </div>
+
+                    
+              
+                    <div class="form-group"> 
+                      <div>
+                        <button type="submit" class="btn btn-primary">Create</button>
+                      </div>
+                    </div>
+
+                  </form>
+
+                </div>
+                  <div class="col-md-3 col-sm-3"></div>
+                  </div>
+          <!--End of b -->  
+          </div>
+
+          <div id="c" class="tab-pane fade">
+
+                <div class="row">
+                <div class="col-md-3 col-sm-3"></div>
+                  <div class="col-md-6 col-sm-6">
+                    <br>
+                    <br>
+
+                    <form class="form-horizontal" action="/newapp/vpn_creation1/" method="post">{% csrf_token %}
+
+                        
+                        <div class="form-group"> 
+                        <div>
+                          <label class="control-label" for="res_group_name">Resource Group</label>
+                          <input type="text" class="form-control" name="res_group_name" id="res_group_name" placeholder="Resource Group">
+                        </div>
+                        </div>  
+
+
+
+                        <div class="form-group">
+                        <label for="sel1" name="abc" value="sel1">Locations</label>
+                        <select class="form-control" name="drop_location" id="sel1">
+                          <option name="abc" value="australiaeast">Australia East</option>
+                          <option name="abc" value="australiasoutheast">Australia SouthEast</option>
+                          <option name="abc" value="brazilsouth">Brazil South</option>
+                          <option name="abc" value="canadacentral">Canada Central</option>
+                          <option name="abc" value="canadaeast">Canada East</option>
+
+                           <option name="abc" value="centralus">Central US</option>
+                          <option name="abc" value="eastasia">East Asia</option>
+                          <option name="abc" value="eastus">East US</option>
+                          <option name="abc" value="eastus2">East US2</option>
+
+                           <option name="abc" value="japaneast">Japan East</option>
+                          <option name="abc" value="japanwest">Japan West</option>
+                          <option name="abc" value="koreacentral">Korea Central</option>
+                          <option name="abc" value="koreasouth">Korea South</option>
+
+                          <option name="abc" value="northcentralus">North Central US</option>
+                          <option name="abc" value="northeurope">North Europe</option>
+                          <option name="abc" value="southcentralus">South Central US</option>
+                          <option name="abc" value="southeastasia">Southeast Asia</option>
+
+                           <option name="abc" value="uksouth">UK South</option>
+                          <option name="abc" value="ukwest">UK West</option>
+                          <option name="abc" value="westcentralus">West Central US</option>
+                          <option name="abc" value="westeurope">West Europe</option>
+
+                           <option name="abc" value="westus">West US</option>
+                          <option name="abc" value="westus2">West US2</option>
+                          
+
+                        </select>
+                        </div>
+                       
+
+                    <div class="form-group"> 
+                     <div>
+                        <label class="control-label" for="vpn_name">VPN NAME</label>
+                        <input type="text" class="form-control" name="vpn_name" id="vpn_name" placeholder="VPN name">
+                     </div>
+                    </div>  
+                    
+                    
+                    
+                    <div class="form-group"> 
+                      <div>
+                          <label class="control-label" for="vpn_name">VPN Address (In the format X.X.X.X/Y)</label>
+                          <input type="text" class="form-control" name="vpn_address" id="vpn_address" placeholder="VPN Address">
+                      </div>
+                    </div>
+
+
+
+              
+                    <div class="form-group"> 
+                      <div>
+                        <button type="submit" class="btn btn-primary">Create</button>
+                      </div>
+                    </div>
+
+                  </form>
+
+                </div>
+                  <div class="col-md-3 col-sm-3"></div>
+                  </div>               
+
+
+
+
+           <!--End of c -->   
+          </div>
+
+          </div>
+
+
+      <!--End Of Menu1-->    
+      </div>
+
+      <div id="menu2" class="tab-pane fade">
+      
+
+          <h3>Public IP</h3>
+          <div class="container">
+          <ul class="nav nav-tabs">
+
+            <li class="active"><a data-toggle="tab" href="#geninfo">Azure Public IP</a></li>
+            <li><a data-toggle="tab" href="#Create_existing">Creation of public ip with in existing Resource Group</a></li>
+            <li><a data-toggle="tab" href="#Create_non_existing">Creation of public ip with new Resource Group</a></li>
+
+          </ul>
+
+          <div class="tab-content">
+
+          <div id="geninfo" class="tab-pane fade in active">
+            <h3>HOME</h3>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+          </div>
+
+            <div id="Create_existing" class="tab-pane fade">
+            
+                <div class="row">
+                <div class="col-md-3 col-sm-3"></div>
+                <div class="col-md-6 col-sm-6">
+                <br>
+                <br>
+
+                <form class="form-horizontal" action="/newapp/public_ip_creation/" method="post">{% csrf_token %}
+                  <div class="form-group">
+                    <label class="control-label " for="resgroup">ResourceGroup</label>
+                    <input type="text" class="form-control" name="resgroup" id="resgroup" placeholder="resgroup">
+                  </div>
+              
+                <div class="form-group">
+                <label class="control-label" for="location">Location:</label>
+                <input type="text" class="form-control" name="location" id="location" placeholder="location"></div>
+
+                <div class="form-group"> 
+                  <div>
+                  <label class="control-label" for="public_ip_name">PublicIP Name</label>
+                  <input type="text" class="form-control" name="public_ip_name" id="public_ip_name" placeholder="public ip name">
+                  </div>
+                  </div>
+
+                <div class="form-group"> 
+                  <div>
+                  <label class="control-label" for="Domainlabel">Domain Label</label>
+                  <input type="text" class="form-control" name="domain_label" id="domain_label" placeholder="Doain name">
+                  </div>
+                  </div>
+
+                <div class="form-group"> 
+                <div>
+                <button type="submit" class="btn btn-primary">Create</button>
+                </div>
+                </div>
+                </form>
+
+                 </div>
+                <div class="col-md-3 col-sm-3"></div>
+                </div>
+              </div>
+  <!--end of create_existing -->
+            </div>
+
+            <div id="Create_non_existing" class="tab-pane fade">
+            <h3>Menu 3</h3>
+              <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+            </div>
+    
+          </div>
+          </div>
+      <!--End of Menu2-->
+      </div>
+
+      <div id="menu3" class="tab-pane fade">
+      <h3>Menu 3</h3>
+        <p>Some content in menu 3.</p>
+      </div>
+
+      </div>
+
+  
+
+
+
+      </div>
+</div>
+
+</body>
+</html>

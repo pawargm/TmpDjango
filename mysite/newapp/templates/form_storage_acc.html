@@ -1,0 +1,129 @@
+{% extends "bootstrap_include.html" %}
+
+{% block content %}
+
+
+
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="#">PRMS</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Home</a></li>
+        
+          
+          
+            <li><a href="#"></a></li>
+            <li><a href="#">Discovery of Resources</a></li>
+            <li><a href="#">Notification</a></li>
+      
+        
+            <li><a href="#">Page 2</a></li>
+            <li><a href="#">Page 3</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="http://127.0.0.1:8000/newapp/signup_acc/"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+        <li><a href="http://127.0.0.1:8000/newapp/login_acc/"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+
+
+<div class="row">
+  
+  <div class="col-md-3 col-sm-3"></div>
+  
+  <div class="col-md-6 col-sm-6">
+
+  <!--<div class="card" style="width: 20rem;">-->
+   
+  <!--<div class="card-block">  -->
+  <br>
+  <br>
+
+  <form class="form-horizontal" action="/newapp/storage_acc_creation/" method="post">{% csrf_token %}
+
+  <div class="form-group">
+    <label class="control-label " for="resgroup">ResourceGroup</label>
+    
+      <input type="text" class="form-control" name="resgroup" id="resgroup" placeholder="resgroup">
+    
+  </div>
+  <div class="form-group">
+    <label class="control-label" for="location">Location:</label>
+    
+      <input type="text" class="form-control" name="location" id="location" placeholder="location">
+    
+  </div>
+  <hr>
+
+  <div class="form-group"> 
+    <div>
+    	<center><label>Storage Account</label></center>
+    	<label class="control-label" for="StorageAccName">StorageAccountName</label>
+    	<input type="text" class="form-control" name="storage_acc_name" id="acc_name" placeholder="AccountName">
+    </div>
+  </div>
+
+  <div class="form-group">
+  <div class="radio">
+  <label><input type="radio" name="abc" value="Standard_LRS">Standard_LRS</label>
+  </div>
+  <div class="radio">
+  <label><input type="radio" name="abc" value="Standard_GRS">Standard_GRS</label>
+  </div>
+  <div class="radio">
+  <label><input type="radio" name="abc" value="Standard_RAGRS">Standard_RAGRS</label>
+  </div>
+  <div class="radio">
+  <label><input type="radio" name="abc" value="Standard_ZRS">Standard_ZRS</label>
+  </div>
+  </div>
+
+
+
+  	<hr>
+
+  	<div class="form-group"> 
+    <div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+  	</div>
+
+  	
+
+	 
+
+
+
+  </form>
+
+
+  <!--</div>
+  </div>-->
+  </div>
+
+
+  <div class="col-md-3 col-sm-3"></div>
+
+
+  </div>
+
+</div>
+  
+
+
+
+
+{% endblock %}

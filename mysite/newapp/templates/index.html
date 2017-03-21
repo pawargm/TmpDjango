@@ -1,0 +1,84 @@
+{% extends "bootstrap_include.html" %}
+
+
+{% block content %}
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="#">PRMS</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Home</a></li>
+        
+          
+          
+            <li><a href="#"></a></li>
+            <li><a href="#">Discovery of Resources</a></li>
+            <li><a href="#">Notification</a></li>
+      
+        
+            <li><a href="#">Page 2</a></li>
+            <li><a href="#">Page 3</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="http://127.0.0.1:8000/newapp/signup_acc/"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+        <li><a href="http://127.0.0.1:8000/newapp/login_acc/"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+  
+<div class="container">
+  <h3>Project Resource Management System for Cloud</h3>
+  <p>In this example, the navigation bar is hidden on small screens and replaced by a button in the top right corner (try to re-size this window).
+  <p>Only when the button is clicked, the navigation bar will be displayed.</p>
+
+
+<table class="table table-bordered">
+  <tbody>
+  <th>
+  
+
+    <form action="/newapp/login_azure_only_pass/" method="post">{% csrf_token %} <!--/newapp/check_netrc/-->
+    {% load staticfiles %}
+    <center><img src="{% static '/ms_azure1.png' %}" class="img-responsive"></center>
+      <div class="form-group">  
+        <center><button type="submit" class="btn btn-success btn-lg"> Access</button></center>
+      </div>
+    </form>
+  
+  </th>
+  <th>
+    
+
+    <form action="/newapp/#/" method="post">{% csrf_token %}
+    {% load staticfiles %}
+    <center><img src="{% static '/amezone2.png' %}" class="img-responsive"></center>
+      <div class="form-group">  
+        
+        <center><button type="submit" class="btn btn-success btn-lg"> Access</button></center>
+      </div>
+    </form>
+    
+  </th>
+  </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+</div>
+
+{% endblock %}

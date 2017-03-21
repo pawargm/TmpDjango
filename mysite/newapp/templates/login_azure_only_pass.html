@@ -1,0 +1,80 @@
+{% extends "bootstrap_include.html" %}
+
+
+{% block content %}
+
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="#">PRMS</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Home</a></li>
+        
+          
+          
+            <li><a href="#"></a></li>
+            <li><a href="#">Discovery of Resources</a></li>
+            <li><a href="#">Notification</a></li>
+      
+        
+            <li><a href="#">Page 2</a></li>
+            <li><a href="#">Page 3</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+        <li><a href="http://127.0.0.1:8000/newapp/logout_main_acc/"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+
+
+
+
+
+
+<div class="container-fluid">
+  <!--<center><h1>Project Resource Management System For Cloud</h1></center>-->
+  
+
+
+<br>
+<p><b>{{message}}</b></p>
+<div class="container">
+	<div class="row">
+		<div class="col-sm-4"></div>
+
+		<div class="col-sm-4">
+			<div class="thumbnail" style="background-color:lavender">
+			<form action="/newapp/login_azure_only_pass/" method="post">{% csrf_token %}
+				<div class="form-group">
+
+				<div class="form-group">
+				<label for="pwd">Password:</label>
+				<input type="password" name="password" class="form-control" id="pwd" placeholder="Password">
+				</div>
+
+				<center><button type="submit"  class="btn btn-success" >Login</button></center>
+
+			</form>
+			</div>
+		</div>
+
+		<div class="col-sm-4"></div>
+
+	</div>
+</div>
+
+</div>
+
+{% endblock %}

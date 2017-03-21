@@ -1,0 +1,86 @@
+{% extends "bootstrap_include.html" %}
+
+{% block content %}
+
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="#">PRMS</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Home</a></li>
+        
+          
+          
+            <li><a href="#"></a></li>
+            <li><a href="#">Discovery of Resources</a></li>
+            <li><a href="#">Notification</a></li>
+      
+        
+            <li><a href="#">Page 2</a></li>
+            <li><a href="#">Page 3</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="http://127.0.0.1:8000/newapp/signup_acc/"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+        <li><a href="http://127.0.0.1:8000/newapp/login_acc/"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+<p>
+			
+			<h1>Storage Accounts</h1>
+			<div class="list-group">
+			<!--<form action="/newapp/delstorage/" method="get">-->
+        
+				{% for vm in lst_rg %}
+
+				<!--<div class="col-sm-2 col-md-3 col-lg-4"></div>
+				<div class="col-xs-12 col-sm-8 col-md-6 col-lg-4">
+					<center><div class="list-group-item">{{vm}}</div></center>
+				</div>
+				<div class="col-sm-2 col-md-3 col-lg-4"></div>
+				-->
+				
+  				<li class="list-group-item active">
+          <div class="text-left">  
+            <label>{{vm}}</label>
+          </div>
+         
+  					<form action="/newapp/delstorage/" method="get">
+  					<div class="text-right">
+  						<!--<label><input type="checkbox" name="abc" value={{vm}}>For Deletion</label>-->
+  						<button type="button" class="btn btn-warning">Edit</button>
+  						<button type="submit" class="btn btn-danger" name="abc" value={{vm}}>Delete</button>
+  					</div>
+            </form>
+
+
+  				</li>
+          <br>
+  				{% endfor %}
+  			
+
+  			<!--</form>-->
+  				
+			</div>
+	
+			
+
+
+
+</p>
+
+
+
+
+{% endblock %}

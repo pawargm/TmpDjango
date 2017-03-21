@@ -1,0 +1,110 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>PRM</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="#">PRMS</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Home</a></li>
+        
+          
+          
+            <li><a href="#"></a></li>
+            <li><a href="#">Discovery of Resources</a></li>
+            <li><a href="#">Notification</a></li>
+      
+        
+            <li><a href="#">Page 2</a></li>
+            <li><a href="#">Page 3</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="http://127.0.0.1:8000/newapp/signup_acc/"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+        <li><a href="http://127.0.0.1:8000/newapp/login_acc/"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+<div class="container">
+  <h2>Networking Resources</h2>
+
+
+<ul class="nav nav-tabs">
+
+  <li class="active"><a data-toggle="tab" href="#vpn">VPN</a></li>
+  <li><a data-toggle="tab" href="#subnet">Subnet</a></li>
+  <li><a data-toggle="tab" href="#nic">NIC</a></li>
+  <li><a data-toggle="tab" href="#publicip">Public IP </a></li>
+  <li><a data-toggle="tab" href="#nsg">NSG</a></li>
+</ul>
+
+<div class="tab-content">
+  <div id="vpn" class="tab-pane fade in active">
+    <h3>Virtual Private Network</h3>
+    <p>
+      An Azure virtual network (VNet) is a representation of your own network in the cloud. It is a logical isolation of the Azure cloud dedicated to your subscription. You can fully control the IP address blocks, DNS settings, security policies, and route tables within this network. You can also further segment your VNet into subnets and launch Azure IaaS virtual machines (VMs) and/or Cloud services (PaaS role instances). Additionally, you can connect the virtual network to your on-premises network using one of the connectivity options available in Azure. In essence, you can expand your network to Azure, with complete control on IP address blocks with the benefit of enterprise scale Azure provides.
+      <br>
+      <br>
+      <br>
+      To better understand VNets, take a look at the figure below, which shows a simplified on-premises network.
+
+      {% load staticfiles %}
+      <center><img src="{% static '/azure_network.png' %}" class="img-responsive"></center>
+
+      <br>
+      <br>
+      <a href="http://127.0.0.1:8000/newapp/vpn_form/"><button type="submit" class="btn btn-primary">Create Virtual Private Network</button></a>
+
+      <spacer type="block" width="50" />
+      <a href="http://127.0.0.1:8000/newapp/lst_vpn/"><button type="submit" class="btn btn-primary">List of present VPNs</button></a>
+      
+
+
+
+    </p>
+  </div>
+
+  <div id="subnet" class="tab-pane fade">
+    <h3>Menu 1</h3>
+    <p>Some content in menu 1.</p>
+  </div>
+
+  <div id="nic" class="tab-pane fade">
+    <h3>Menu 2</h3>
+    <p>Some content in menu 2.</p>
+  </div>
+
+  <div id="publicip" class="tab-pane fade">
+    <h3>Menu 2</h3>
+    <p>Some content in menu 2.</p>
+  </div>
+ 
+  <div id="nsg" class="tab-pane fade">
+    <h3>Menu 2</h3>
+    <p>Some content in menu 2.</p>
+  </div>
+
+</div>
+
+</body>
+
+</html>
+

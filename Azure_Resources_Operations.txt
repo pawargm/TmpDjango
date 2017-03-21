@@ -1,0 +1,141 @@
+Azure Resources 
+
+1>Resource group
+2>Storage Account
+3>Network
+	1>VPN
+	2>subnet
+	3>NIC
+	4>public ip
+4>Virtual machine
+
+
+For handleing resources of Azure use ARM (Azure Resource Management API) in python
+
+spicifically user ARM API of version 0.30.0rc6
+
+1>Resource group
+	
+	Resource group is place where we can create resources provided by azure according to our need
+
+	For Resource Group
+
+		creation
+		 	required instance of UserPassCredential class
+		 	then use it as parameter and subid for creating instance of ResourceManagementClient instance 
+
+		 	using ResourceManagementClient instance we can create resourcegroup by calling metode create_or_update
+
+		for deletion 
+			resource_groups.delete(resource_group_name) methode take resource group name as parameter
+		for listing Resource group
+			resource_groups.list_resources(resource_group_name)
+
+2>Storage Account
+
+	For Storage Account operation use StorageManagementClient class
+
+		creation
+
+			it also required UserPassCredential class instance
+
+			use instance of UserPassCredential instance as parameter and subid to create instance of StorageManagementClient
+
+			for creating storage account it has method storage_accounts.create() it takes GROUP_NAME,STORAGE_ACCOUNT_NAME as parameters
+
+		Deleting 
+
+			storage_accounts.delete()
+			it takes parameter resourcegroup name and storage account name
+
+		Listing Storage Account
+
+			storage_accounts.list()
+
+3>Attachment disk to Storage Account
+
+		it also required UserPassCredential class instance
+
+		use instance of UserPassCredential instance as parameter and subid to create instance of ComputeManagementClient 
+
+		for creating storage account it has method virtual_machines.create_or_update() it takes GROUP_NAME,VM_NAME, and
+
+		{
+						'location':LOCATION,
+		'storage_profile':{'data_disks':[{'name':'mydatadisk1','disk_size_gb':1,'lun':0,'vhd':{'uri':"http://{}.blob.core.windows.net/vhds/mydatadisk1.vhd".format(STORAGE_ACCOUNT_NAME)},'create_option':'Empty'}]
+																									}
+		}
+
+		as parameters
+
+4>Network
+
+	1>VPN
+
+		for VPN operation use NetworkManagementClient class instance
+
+		it create vpn using virtual_networks.create_or_update() methode it takes 
+			resource group name,vpn and 								{'location':LOCATION,
+																			 'address_space':{
+																			 		'address_prefixes':['10.0.0.0/16']
+
+																			 		}
+																			}
+		name as parameter
+
+		for deletion
+
+		 network_client.virtual_networks.delete() methode
+		 it takes res_groupname and vpnname as parameter
+
+		for listing
+
+		 	network_client.virtual_networks.list(RES_GROUP_NAME)
+
+	2>Subnet
+
+		use instance of NetworkManagementClient for creation of subnet
+
+		NetworkManagementClient.subnets.create_or_update() methode used for creation of subnet
+
+		GROUP_NAME, VPN_NAME,SUBNET_NAME,{'address_prefix':'10.64.0.0/10'} this used as parameter for above methode
+
+	3>NIC
+		use instance of NetworkManagementClient for creation of subnet
+
+		NetworkManagementClient.network_interfaces.create_or_update()
+
+		GROUP_NAME, NIC_NAME, and {'location':LOCATION, 'ip_configurations':[{'name':'ip2', 'subnet':{'id':subnet_info2.id}}]} as parameter
+
+		for deleteing NIC
+
+		network_interfaces.delete(GROUP_NAME, NIC_NAME) method
+
+	4>public ip
+
+		use instance of NetworkManagementClient for creation of subnet
+
+		NetworkManagementClient.public_ip_addresses.create_or_update(RES_GROUP,PUBLIC_IPNAME,public_ip_parameters)
+
+		public_ip_parameters = {
+							'location':'eastus',
+							 'public_ip_allocation_method':'static',
+							 'dns_settings':{'domain_name_label':'abc'},
+							 'idle_timeout_in_minutes': 4
+						
+						}
+
+4>Virtual machine
+
+	use the instance of ComputeManagementClient
+
+	ComputeManagementClient.create_or_update()
+
+	res_group,vm_name,and dictionary which has location and tages value
+
+	2>Starting VM
+
+		ComputeManagementClient.virtual_machines.start(GROUP_NAME,VM_NAME)
+	3>Listing VM
+
+		ComputeManagementClient.virtual_machines.list_all()
